@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: c1eec9fb11240674ca45ede57e5e42cd
+timeCreated: 1522574165
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: bodyCover
+    100004: Camera
+    100006: Lamp
+    400000: //RootNode
+    400002: bodyCover
+    400004: Camera
+    400006: Lamp
+    2000000: Camera
+    2100000: No Name
+    2300000: bodyCover
+    3300000: bodyCover
+    4300000: bodyCover
+    10800000: Lamp
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  a
