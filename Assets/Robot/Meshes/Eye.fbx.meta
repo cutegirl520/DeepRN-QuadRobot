@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: 999247e10778c0b479528d867478a60a
+timeCreated: 1522574164
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Camera
+    100002: //RootNode
+    100004: Eye
+    100006: Lamp
+    400000: Camera
+    400002: //RootNode
+    400004: Eye
+    400006: Lamp
+    2000000: Camera
+    2100000: No Name
+    2300000: Eye
+    3300000: Eye
+    4300000: Eye
+    10800000: Lamp
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    a
