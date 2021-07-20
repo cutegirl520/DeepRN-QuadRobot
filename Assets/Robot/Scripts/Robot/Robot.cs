@@ -49,4 +49,96 @@ public class Robot : MonoBehaviour
     /// </summary>
     public float GetDistance()
     {
-        Vector3 movementVector = Vector3.Project((tr
+        Vector3 movementVector = Vector3.Project((transform.position - initialPosition), initialDirection);
+        return movementVector.magnitude * (Vector3.Angle(movementVector, initialDirection) > 90 ? -1 : 1);
+    }
+
+    /// <summary>
+    /// Fixes positions of all legs.
+    /// </summary>
+    public void FixLegs()
+    {
+        FixUpperLegs();
+        FixLowerLegs();
+    }
+
+    /// <summary>
+    /// Unfixes positions of all legs.
+    /// </summary>
+    public void UnfixLegs()
+    {
+        UnfixUpperLegs();
+        UnfixLowerLegs();
+    }
+
+    /// <summary>
+    /// Fixes positions of all four upper legs.
+    /// </summary>
+    public void FixUpperLegs()
+    {
+        foreach (var leg in legs)
+            if (leg != null && leg.upperLeg != null)
+                leg.upperLeg.IsFixed = true;
+    }
+
+    /// <summary>
+    /// Unfixes positions of all four upper legs.
+    /// </summary>
+    public void UnfixUpperLegs()
+    {
+        foreach (var leg in legs)
+            if (leg != null && leg.upperLeg != null)
+                leg.upperLeg.IsFixed = false;
+    }
+
+    /// <summary>
+    /// Fixes positions of all four lower legs.
+    /// </summary>
+    public void FixLowerLegs()
+    {
+        foreach (var leg in legs)
+            if (leg != null && leg.upperLeg != null)
+                leg.lowerLeg.IsFixed = true;
+    }
+
+    /// <summary>
+    /// Unfixes positions of all four lower legs.
+    /// </summary>
+    public void UnfixLowerLegs()
+    {
+        foreach (var leg in legs)
+            if (leg != null && leg.upperLeg != null)
+                leg.lowerLeg.IsFixed = false;
+    }
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// Draw debug info.
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying)
+        {
+            initialPosition = transform.position;
+            initialDirection = GetForwardDirection();
+        }
+
+        // Draw walked distance
+        Gizmos.color = Color.black;
+        Gizmos.DrawLine(initialPosition, initialPosition + initialDirection * GetDistance());
+    }
+
+    /// <summary>
+    /// Draw debug info.
+    /// </summary>
+    private void OnDrawGizmosSelected()
+    {
+        if (!Application.isPlaying)
+        {
+            initialPosition = transform.position;
+            initialDirection = GetForwardDirection();
+        }
+
+        // Draw walking direction
+        UnityEditor.Handles.color = Color.white;
+        UnityEditor.Handles.ArrowHandleCap
