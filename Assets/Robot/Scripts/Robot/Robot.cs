@@ -141,4 +141,19 @@ public class Robot : MonoBehaviour
 
         // Draw walking direction
         UnityEditor.Handles.color = Color.white;
-        UnityEditor.Handles.ArrowHandleCap
+        UnityEditor.Handles.ArrowHandleCap(-1,
+                                            transform.position,
+                                            Quaternion.FromToRotation(Vector3.forward, initialDirection),
+                                            UnityEditor.HandleUtility.GetHandleSize(transform.position),
+                                            EventType.Repaint);
+    }
+#endif
+}
+
+[System.Serializable]
+public class Leg
+{
+    public ServoMotor upperLeg;
+    public ServoMotor lowerLeg;
+}
+
