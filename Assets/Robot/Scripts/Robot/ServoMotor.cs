@@ -64,4 +64,75 @@ public class ServoMotor : MonoBehaviour
             return _isFixed;
         }
         set
-     
+        {
+            if (_isFixed == value || joint == null) return;
+            _isFixed = value;
+
+            // Fix servo position
+            if (_isFixed)
+            {
+                targetAngle = GetServoAngle();
+                var jointAngle = GetJointAngle();
+                joint.limits = new JointLimits() { bounceMinVelocity = float.MaxValue, min = jointAngle - 0.001f, max = jointAngle };
+            }
+            // Unfix servo position
+            else
+            {
+                joint.limits = new JointLimits() { bounceMinVelocity = float.MaxValue, min = minAngle - jointLimitsOffset, max = maxAngle + jointLimitsOffset };
+            }
+        }
+    }
+
+    /// <summary>
+    /// An interface to access joint.useMotor. The value is cached to increase performance,
+    /// because accessing joint.useMotor normally takes some processing time.
+    /// </summary>
+    private bool _isMotorEnabled;
+    public bool IsMotorEnabled
+    {
+        get
+        {
+            return _isMotorEnabled;
+        }
+        set
+        {
+            if (_isMotorEnabled == value || joint == null) return;
+            joint.useMotor = _isMotorEnabled = value;
+        }
+    }
+
+    /// <summary>
+    /// Initialize servo.
+    /// </summary>
+    private void Awake()
+    {
+        if (Application.isPlaying)
+        {
+            correctedAxis = GetCorrectedAxis();
+            rigidbody = GetComponent<Rigidbody>();
+            positionRegulator = new PIDRegulator(positionRegulatorProfile);
+            velocityRegulator = new PIDRegulator(velocityRegulatorProfile);
+
+            CreateJoint();
+
+            if (!profile || !positionRegulatorProfile)
+            {
+                Debug.Log("Servo " + name + " will not work properly, because it is not fully configured!");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Creates HingeJoint.
+    /// </summary>
+    private void CreateJoint()
+    {
+        //gameObject is a Base class for all entities in Unity scenes, Adds a component class named className to the game object.
+        joint = gameObject.AddComponent<HingeJoint>();
+        joint.connectedBody = servoBase;
+        joint.axis = correctedAxis;
+        joint.anchor = anchor;
+        joint.useLimits = true;
+        joint.limits = new JointLimits() { bounceMinVelocity = float.PositiveInfinity, min = minAngle - jointLimitsOffset, max = maxAngle + jointLimitsOffset };
+
+        IsMotorE
