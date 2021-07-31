@@ -135,4 +135,71 @@ public class ServoMotor : MonoBehaviour
         joint.useLimits = true;
         joint.limits = new JointLimits() { bounceMinVelocity = float.PositiveInfinity, min = minAngle - jointLimitsOffset, max = maxAngle + jointLimitsOffset };
 
-        IsMotorE
+        IsMotorEnabled = true;
+        IsFixed = false;
+        axisRelativeToBase = GetAxisRelativeToBase();
+        zeroDirection = GetJointDirection();
+        targetAngle = JointAngleToServoSpace(GetJointAngle());
+    }
+
+    /// <summary>
+    /// If axis vector equals to 0, 0, 0, by default Unity uses X axis.
+    /// </summary>
+    private Vector3 GetCorrectedAxis()
+    {
+        //right means (1,0,0)
+        return axis.magnitude == 0 ? Vector3.right : axis.normalized;
+    }
+
+    /// <summary>
+    /// Calculates axis direction relative to the base object.
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 GetAxisRelativeToBase()
+    {
+        //Transform represents Position, rotation and scale of an object. The rotation of the transform in world space stored as a Quaternion.
+        Vector3 res = transform.rotation * correctedAxis;
+        if (servoBase)
+        {
+            //Quaternions are used to represent rotations.
+            res = Quaternion.Inverse(servoBase.transform.rotation) * res;
+        }
+        return res;
+    }
+
+    /// <summary>
+    /// Execute every frame.
+    /// </summary>
+    private void Update()
+    {
+        // In editor mode, joint look direction is always zero direction
+        // Returns true in the Unity editor when in play mode.
+        if (!Application.isPlaying)
+        {
+            correctedAxis = GetCorrectedAxis();
+            zeroDirection = GetJointDirection();
+            axisRelativeToBase = GetAxisRelativeToBase();
+        }
+    }
+
+    /// <summary>
+    /// Servo motor physics.
+    /// </summary>
+    private void FixedUpdate()
+    {
+        if (!IsMotorEnabled || IsFixed || !positionRegulatorProfile || !profile) return;
+
+        // Run servo motor
+        if (IsMotorEnabled)
+        {
+            // Angle regulator controls servo velocity based on the position error
+            var targetVelocity = positionRegulator.Run(ServoAngleToJointSpace(targetAngle), GetJointAngle(), Time.fixedDeltaTime);
+
+            //Clamps target velocity according to servo profile
+            targetVelocity = Mathf.Clamp(targetVelocity, -profile.maxVelocity, profile.maxVelocity);
+
+            // Unity is quite bad at keeping target velocity, so we might use an extra regulator, which 
+            // takes velocity error as an input. Even though we write its output value to joint.motor.targetVelocity,
+            // it works more like a torque control.
+
+            //Basically this line calculates th
