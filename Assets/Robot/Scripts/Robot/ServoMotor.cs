@@ -202,4 +202,59 @@ public class ServoMotor : MonoBehaviour
             // takes velocity error as an input. Even though we write its output value to joint.motor.targetVelocity,
             // it works more like a torque control.
 
-            //Basically this line calculates th
+            //Basically this line calculates the velocity error. Will add later on.
+            var velocityCorrection = velocityRegulator.Run(targetVelocity, GetServoVelocity(), Time.fixedDeltaTime);
+            velocityCorrection = Mathf.Clamp(velocityCorrection, -500, 500);
+            //joint motor applies maxForce Available and sets target vel
+            joint.motor = new JointMotor() { force = profile.maxForce, freeSpin = false, targetVelocity = targetVelocity + velocityCorrection };
+        }
+    }
+
+    /// <summary>
+    /// Get angular velocity in degrees per second.
+    /// </summary>
+    public float GetServoVelocity()
+    {
+        // We have to calculate servo velocity manually, because HingeJoint.velocity shows target velocity 
+        // and not the actual velocity of the rigidbody
+        Vector3 velocity = rigidbody.angularVelocity * Mathf.Rad2Deg;
+        
+        //we want to get servo velocity thats why we subtract from robot body.
+        if (servoBase) velocity = velocity - servoBase.angularVelocity;
+        //transforms vector from world to local space
+        velocity = transform.InverseTransformVector(velocity);
+
+        //returns dot product of 2 vectors. Angular velocity is angular displacement relative to origin
+        return Vector3.Dot(velocity, correctedAxis);
+    }
+
+    /// <summary>
+    /// Get angle.
+    /// </summary>
+    public float GetServoAngle()
+    {
+        //The output of this function is determined by clockwise or anticlockwise servo rotation
+        return JointAngleToServoSpace(GetJointAngle());
+    }
+
+    /// <summary>
+    /// Get joint angle in degrees.
+    /// </summary>
+    // Changed to public
+    private float GetJointAngle()
+    {
+        // We have to calculate joint angle manually, because HingeJoint.angle is broken since Unity 5.2 
+        //Returns the signed angle in degrees between from and to, about axis.
+        //The smaller of the two possible angles between the two vectors is returned, therefore the result will never be greater than 180 degrees or smaller than -180 degrees.
+        return Vector3.SignedAngle(zeroDirection, GetJointDirection(), axisRelativeToBase);
+    }
+
+    /// <summary>
+    /// Look direction of the joint. Used in the angle calculations by Unity.
+    /// </summary>
+    private Vector3 GetJointDirection()
+    {
+        // Direction from the unscaled joint center to the transform position
+        Vector3 dir = transform.position - GetUnscaledJointPosition();
+
+        // Or just use one
