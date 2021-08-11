@@ -257,4 +257,60 @@ public class ServoMotor : MonoBehaviour
         // Direction from the unscaled joint center to the transform position
         Vector3 dir = transform.position - GetUnscaledJointPosition();
 
-        // Or just use one
+        // Or just use one of the local axis' if joint center is located at the transform position (anchor = 0, 0, 0)
+        // or dir vector is perpendicular to the rotation plane
+        // The length (magnitude) of the vector is square root of (x*x+y*y+z*z).
+        if (dir.magnitude == 0 || Mathf.Abs(Vector3.Dot(dir.normalized, transform.rotation * correctedAxis)) == 1)
+        {
+            // If angle between Z axis and the joint axis is more or equals to 45 degrees, use Z axis
+            if (Mathf.Abs(Vector3.Dot(Vector3.forward, correctedAxis)) <= Mathf.Cos(45 * Mathf.Deg2Rad))
+                dir = transform.forward;
+            // Otherwise use X axis (don't ask me why, that's how Unity PhysX does it)
+            else
+                //Transform.right moves the GameObject in the red arrow’s axis (X).
+                dir = transform.right;
+        }
+        
+        // Calculated relative to the base object
+        if (servoBase)
+        {
+            //.inverse returns the inverse of the rotation
+            //To get the new position after rotation, multiply both vectors.
+            dir = Quaternion.Inverse(servoBase.transform.rotation) * dir;
+        }
+
+        // And projected onto the rotation plane
+        dir = Vector3.ProjectOnPlane(dir, axisRelativeToBase);
+
+        //When normalized, a vector keeps the same direction but its length is 1.0.
+        return dir.normalized;
+    }
+
+    /// <summary>
+    /// Unscaled joint position is used in the angle calcultions by Unity.
+    /// It is the same as the actual joint center for Transform.localScale = 1, 1, 1
+    /// </summary>
+    private Vector3 GetUnscaledJointPosition()
+    {
+        //Position of the Transform in X, Y, and Z coordinates,
+        //Rotation of the Transform around the X, Y, and Z axes, measured in degrees,
+        return transform.position + transform.rotation * anchor;
+    }
+
+    /// <summary>
+    /// Set target angle.
+    /// </summary>
+    public void SetAngle(float angle)
+    {
+        StartCoroutine(SetAngleCoroutine(angle));
+    }
+
+    /// <summary>
+    /// Simulate servo delay.
+    /// </summary>
+    private IEnumerator SetAngleCoroutine(float angle)
+    {
+        //Yield return suspends routine execution for given amount if seconds using scaled time
+        //If profile exisits use delay set there, else timescale set to 0 
+        yield return new WaitForSeconds(profile ? profile.delay : 0);
+        //clamps angle value between min angle and max ang
