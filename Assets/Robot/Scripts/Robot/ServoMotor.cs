@@ -313,4 +313,62 @@ public class ServoMotor : MonoBehaviour
         //Yield return suspends routine execution for given amount if seconds using scaled time
         //If profile exisits use delay set there, else timescale set to 0 
         yield return new WaitForSeconds(profile ? profile.delay : 0);
-        //clamps angle value between min angle and max ang
+        //clamps angle value between min angle and max angle, depending if turning clockwise or anticlockwise
+        targetAngle = Mathf.Clamp(angle, isClockwise ? minAngle : -maxAngle , isClockwise ? maxAngle : -minAngle);
+    }
+
+    /// <summary>
+    /// Convert servo input angle to joint space (inverse if counter clockwise)
+    /// </summary>
+    private float ServoAngleToJointSpace(float a)
+    {
+        if (!isClockwise) a = -a;
+        return Mathf.Clamp(a, minAngle, maxAngle);
+    }
+
+    /// <summary>
+    /// Convert joint angle to servo input/output space (inverse if counter clockwise)
+    /// </summary>
+    /// changed to public
+    private float JointAngleToServoSpace(float a)
+    {
+        if (!isClockwise) a = -a;
+        return a;
+    }
+
+#if UNITY_EDITOR
+
+    /// <summary>
+    /// Visualize servo operation.
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        Vector3 globalAnchor = transform.TransformPoint(anchor);
+        Vector3 globalAxis = transform.TransformDirection(correctedAxis);
+        float servoAngle = GetServoAngle();
+        float gizmoScale = Mathf.Min(UnityEditor.HandleUtility.GetHandleSize(globalAnchor), 
+            profile ? profile.gizmoMaxScaleDistance : 1) * (profile ? profile.gizmoScale : 1);
+
+        // Draw joint anchor and rotation axis
+        UnityEditor.Handles.color = targetAngle > servoAngle + 0.1f ? Color.red : targetAngle < servoAngle - 0.1f ? Color.blue : Color.green;
+        UnityEditor.Handles.CylinderHandleCap(1, globalAnchor, Quaternion.FromToRotation(Vector3.forward, globalAxis), 0.4f * gizmoScale, EventType.Repaint);
+    }
+
+    /// <summary>
+    /// Visualize servo operation when servo selected.
+    /// </summary>
+    private void OnDrawGizmosSelected()
+    {
+        Quaternion baseRotation = servoBase ? servoBase.rotation : Quaternion.identity;
+        Vector3 globalAnchor = transform.TransformPoint(anchor);
+        Vector3 globalAxis = transform.TransformDirection(correctedAxis);
+        Vector3 globalZeroDirection = baseRotation * zeroDirection;
+
+        if (!Application.isPlaying) targetAngle = GetServoAngle();
+
+        float gizmoScale = Mathf.Min(UnityEditor.HandleUtility.GetHandleSize(globalAnchor), 
+            profile ? profile.gizmoMaxScaleDistance : 1) * (profile ? profile.gizmoScale : 1);
+
+        // Draw joint limits
+        UnityEditor.Handles.color = IsMotorEnabled && !IsFixed ? new Color(0, 0, 1f, 0.2f) : new Color(0f, 0f, 0f, 0.2f);
+        UnityEditor.Handles.DrawSolidArc(globalAnchor, globalAxis, Q
