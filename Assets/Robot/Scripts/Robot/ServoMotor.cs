@@ -371,4 +371,42 @@ public class ServoMotor : MonoBehaviour
 
         // Draw joint limits
         UnityEditor.Handles.color = IsMotorEnabled && !IsFixed ? new Color(0, 0, 1f, 0.2f) : new Color(0f, 0f, 0f, 0.2f);
-        UnityEditor.Handles.DrawSolidArc(globalAnchor, globalAxis, Q
+        UnityEditor.Handles.DrawSolidArc(globalAnchor, globalAxis, Quaternion.AngleAxis(minAngle, globalAxis) * 
+            (Quaternion.AngleAxis(angleGizmoOffset, globalAxis) * globalZeroDirection), maxAngle - minAngle, 1.2f * gizmoScale);
+        // Draw direction to the target position of the joint
+        UnityEditor.Handles.color = Color.yellow;
+        UnityEditor.Handles.DrawLine(globalAnchor, globalAnchor + Quaternion.AngleAxis(ServoAngleToJointSpace(targetAngle), globalAxis) * 
+            (Quaternion.AngleAxis(angleGizmoOffset, globalAxis) * globalZeroDirection) * 1.2f * gizmoScale);
+        // Draw direction to the current position of the joint
+        UnityEditor.Handles.color = Color.green;
+        UnityEditor.Handles.DrawLine(globalAnchor, globalAnchor + baseRotation * 
+            (Quaternion.AngleAxis(angleGizmoOffset, globalAxis) * GetJointDirection()) * 1.2f * gizmoScale);
+    }
+#endif
+
+
+    //robot.legs[0].upperLeg.setAngle(45);
+}
+
+public class RandomMovement
+{
+
+    private Robot robot;
+
+    //Testing a basic loop which chooses random values for joint target angles
+    public void randomAngle()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            //robot.legs[i].lowerLeg.SetAngle(Random.Range(-45.0f, 45.0f));
+            robot.legs[i].lowerLeg.SetAngle(45);
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            //robot.legs[i].upperLeg.SetAngle(Random.Range(-45.0f, 45.0f));
+            robot.legs[i].lowerLeg.SetAngle(45);
+        }
+
+    }
+}
