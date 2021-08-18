@@ -119,4 +119,43 @@ public class RobotUIController : MonoBehaviour
     //        }
 
     //        else
- 
+    //        {
+    //            yield return new WaitForSeconds(1);
+    //        }
+
+    //        //}
+
+    //        do robot.legs[0].upperLeg.SetAngle(-45);
+
+    //    while (current_angle0 != -45);
+
+    //    do robot.legs[0].upperLeg.SetAngle(45);
+
+    //    while (current_angle0 != 45);
+
+    //    do robot.legs[2].upperLeg.SetAngle(-45);
+
+    //    while (current_angle2 != -45);
+
+    //    do robot.legs[2].upperLeg.SetAngle(45);
+
+    //    while (current_angle2 != 45);
+    //}
+
+    public void ToggleUpperLegs(bool value)
+    {
+        foreach (var leg in robot.legs)
+        {
+            leg.upperLeg.IsFixed = value;
+        }
+    }
+
+    public void ToggleLowerLegs(bool value)
+    {
+        foreach (var leg in robot.legs)
+        {
+            leg.lowerLeg.IsFixed = value;
+        }
+
+    }
+}
