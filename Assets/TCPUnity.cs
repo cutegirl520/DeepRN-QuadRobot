@@ -46,3 +46,75 @@ public class TCPUnity : MonoBehaviour
 				socket_reader = new StreamReader(net_stream);
 
 				connected = true;
+			}
+			catch (Exception e)
+			{
+				statusTxt.text = "Socket error: " + e;
+			}
+		}
+	}
+
+	void Update()
+	{
+		if (connected)
+		{
+			if (!canSend)
+				return;
+
+			sendData = xInput.text + "," + yInput.text + "," + zInput.text + "," + floatInput + "," + intInput;
+			writeSocket(sendData);
+
+			string receivedData = readSocket();
+			if (receivedData != "")
+			{
+				string[] splitString = Regex.Split(receivedData, ",");
+
+				string r_xInput = splitString[0];
+				string r_yInput = splitString[1];
+				string r_zInput = splitString[2];
+
+				float r_floatInput = float.Parse(splitString[3]);
+				int r_intInput = int.Parse(splitString[4]);
+
+				receivedTxt.text = r_xInput + "\n" + r_yInput + "\n" + r_zInput + "\n" + r_floatInput + "\n" + r_intInput;
+				statusTxt.text = "Received";
+				canSend = true;
+			}
+			else
+			{
+				statusTxt.text = "!Waiting for python data";
+			}
+		}
+	}
+
+	public void writeSocket(string line)
+	{
+		socket_writer.Write(line);
+		socket_writer.Flush();
+	}
+
+	public String readSocket()
+	{
+		if (net_stream.DataAvailable)
+			return socket_reader.ReadLine();
+
+		return "";
+	}
+
+	public void Disconnect()
+	{
+		if (connected)
+		{
+			writeSocket("Disconnect");
+			socket_writer.Close();
+			socket_reader.Close();
+			tcp_socket.Close();
+			connected = false;
+		}
+	}
+
+	void OnApplicationQuit()
+	{
+		Disconnect();
+	}
+}
