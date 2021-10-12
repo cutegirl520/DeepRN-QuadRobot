@@ -975,4 +975,91 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u
+--- !u!222 &117336374
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 117336371}
+  m_CullTransparentMesh: 0
+--- !u!1 &122612534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 122612535}
+  - component: {fileID: 122612538}
+  - component: {fileID: 122612537}
+  - component: {fileID: 122612536}
+  m_Layer: 5
+  m_Name: Leg2Upper Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &122612535
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 122612534}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 16.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 928285739}
+  - {fileID: 2063171871}
+  - {fileID: 791484084}
+  - {fileID: 1064855616}
+  - {fileID: 2004753652}
+  - {fileID: 941161852}
+  - {fileID: 1009683480}
+  - {fileID: 1090427337}
+  m_Father: {fileID: 770445505}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 223, y: -36.549927}
+  m_SizeDelta: {x: 148, y: 73.100006}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &122612536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 122612534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bae45affd804314bad65c1b79ebf0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  servo: {fileID: 1509701754}
+  title: {fileID: 928285740}
+  angleText: {fileID: 1009683481}
+  motorToggle: {fileID: 2063171872}
+  fixToggle: {fileID: 791484085}
+  input: {fileID: 2004753653}
+  slider: {fileID: 1090427338}
+--- !u!114 &122612537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 122612534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.166}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      V
