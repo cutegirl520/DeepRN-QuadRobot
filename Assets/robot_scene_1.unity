@@ -2760,4 +2760,90 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1331128172}
-  - {fileID: 127705
+  - {fileID: 1277052924}
+  - {fileID: 2116338194}
+  - {fileID: 1890778258}
+  - {fileID: 147730296}
+  - {fileID: 1561600674}
+  - {fileID: 1349848634}
+  - {fileID: 2143495542}
+  m_Father: {fileID: 770445505}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 519, y: -36.549805}
+  m_SizeDelta: {x: 148, y: 73.100006}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &385808790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 385808788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bae45affd804314bad65c1b79ebf0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  servo: {fileID: 1509701754}
+  title: {fileID: 1331128173}
+  angleText: {fileID: 1349848635}
+  motorToggle: {fileID: 1277052925}
+  fixToggle: {fileID: 2116338195}
+  input: {fileID: 147730297}
+  slider: {fileID: 2143495543}
+--- !u!114 &385808791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 385808788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.166}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &385808792
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 385808788}
+  m_CullTransparentMesh: 0
+--- !u!1 &388762964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 388762965}
+  - component: {fileID: 388762968}
+  - component: {fileID: 388762967}
+  - component: {fileID: 388762966}
+  m_Layer: 0
+  m_Name: ServoBody2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &388762965
+Tra
