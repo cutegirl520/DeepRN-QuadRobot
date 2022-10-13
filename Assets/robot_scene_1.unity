@@ -11085,4 +11085,89 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "120.1\xB0"
+--- !u!222 &1349848636
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1349848633}
+  m_CullTransparentMesh: 0
+--- !u!1 &1350808842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1350808843}
+  - component: {fileID: 1350808847}
+  - component: {fileID: 1350808845}
+  - component: {fileID: 1350808844}
+  m_Layer: 0
+  m_Name: LowerLeg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1350808843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1350808842}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.041500002, y: -0.0126, z: -0.0047999993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 863466652}
+  - {fileID: 35037029}
+  m_Father: {fileID: 1087204620}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1350808844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1350808842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfba8a55ed6cd8e448049204622c7589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebugging: 0
+  frictionProfile: {fileID: 11400000, guid: 2269265b52b578c44a24e81869f40d0c, type: 2}
+--- !u!114 &1350808845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1350808842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d25728d04fec0e44915c63406ed882c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isClockwise: 1
+  targetAngle: 0
+  servoBase: {fileID: 1509701752}
+  anchor: {x: 0, y: 0.01, z: 0}
+  axis: {x: 0, y: 0, z: 1}
+  minAngle: 0
+  maxAngle: 90
+  angleGizmoOffset: 0
+  profile: {fileID: 11400000, guid: d3eb004942282ae41b47aea0a352f800, type: 2}
+  positionRegulatorProfile: {fileID: 11400000, guid: c080ecc239a80f644abc7e0fe146125b,
+    type: 2}
+  velocityRegulatorProfile: {fileID: 11400000, guid: 8f4d5b0adab7cee4584d37a2f23bc83d,
+    type: 2}
+--- !u!54 &1350808847
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Ga
