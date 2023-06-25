@@ -13861,4 +13861,87 @@ GameObject:
   m_Component:
   - component: {fileID: 1692536198}
   - component: {fileID: 1692536201}
-  - component
+  - component: {fileID: 1692536200}
+  - component: {fileID: 1692536199}
+  m_Layer: 5
+  m_Name: Leg1Lower Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1692536198
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1692536197}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 555044855}
+  - {fileID: 817133130}
+  - {fileID: 699215318}
+  - {fileID: 1259348306}
+  - {fileID: 1321465653}
+  - {fileID: 461801461}
+  - {fileID: 1545288101}
+  - {fileID: 1373849648}
+  m_Father: {fileID: 770445505}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 75, y: -110.1}
+  m_SizeDelta: {x: 148, y: 73.100006}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1692536199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1692536197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bae45affd804314bad65c1b79ebf0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  servo: {fileID: 1509701754}
+  title: {fileID: 555044856}
+  angleText: {fileID: 1545288102}
+  motorToggle: {fileID: 817133131}
+  fixToggle: {fileID: 699215319}
+  input: {fileID: 1321465654}
+  slider: {fileID: 1373849649}
+--- !u!114 &1692536200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1692536197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.166}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1692536201
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {
