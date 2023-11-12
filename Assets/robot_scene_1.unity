@@ -16523,4 +16523,91 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
-  
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &2077165049
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2077165046}
+  m_CullTransparentMesh: 0
+--- !u!1 &2112672259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2112672264}
+  - component: {fileID: 2112672260}
+  - component: {fileID: 2112672262}
+  - component: {fileID: 2112672261}
+  m_Layer: 0
+  m_Name: UpperLeg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!54 &2112672260
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2112672259}
+  serializedVersion: 2
+  m_Mass: 0.02
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2112672261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2112672259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d25728d04fec0e44915c63406ed882c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isClockwise: 0
+  targetAngle: -0
+  servoBase: {fileID: 1702931788}
+  anchor: {x: 0, y: 0, z: 0}
+  axis: {x: 0, y: 1, z: 0}
+  minAngle: -90
+  maxAngle: 90
+  angleGizmoOffset: 0
+  profile: {fileID: 11400000, guid: d3eb004942282ae41b47aea0a352f800, type: 2}
+  positionRegulatorProfile: {fileID: 11400000, guid: c080ecc239a80f644abc7e0fe146125b,
+    type: 2}
+  velocityRegulatorProfile: {fileID: 11400000, guid: 8f4d5b0adab7cee4584d37a2f23bc83d,
+    type: 2}
+--- !u!114 &2112672262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2112672259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfba8a55ed6cd8e448049204622c7589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebugging: 0
+  frictionProfile: {fileID: 11400000, guid: 2269265b52b578c44a24e81869f40d0c, type: 2}
+--- !u!4 &2112672264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 
